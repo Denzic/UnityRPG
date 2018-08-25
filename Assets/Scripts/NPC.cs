@@ -6,12 +6,12 @@ public class NPC : Interactable {
 
     private void Update()
     {
-        Interact();
+        
     }
 
     public override void Interact()
     {
-        
+        Interact();
         //print("Interacted with an NPC");
     }
 }
