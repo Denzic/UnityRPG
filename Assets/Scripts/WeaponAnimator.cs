@@ -18,9 +18,9 @@ public class WeaponAnimator : Interactable
     public void EnemyCheck()
     {
         enemyDetector = Physics.OverlapSphere(Agent.transform.position, 3, enemyLayerMask);
-        if (enemyDetector.Length > 0)
+        if (enemyDetector.Length > 0 )
         {
-            print(enemyDetector.Length);
+            //print(enemyDetector.Length);
             if (Agent.remainingDistance >= 1.9f && Agent.remainingDistance <= 2.5f)
                 PerformAttack();
             if (Agent.remainingDistance < 1.9f)
@@ -28,8 +28,8 @@ public class WeaponAnimator : Interactable
         }
         if (enemyDetector.Length == 0)
             StopAttack();
-
     }
+
     void PerformAttack()
     {
         animator.SetTrigger("normal_Attack"); ;
