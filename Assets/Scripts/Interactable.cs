@@ -13,6 +13,8 @@ public class Interactable : MonoBehaviour {
         this.Agent = agent;
         agent.stoppingDistance = 3f;
         agent.destination = transform.position;
+        if (agent.hasPath)
+            GameObject.FindGameObjectWithTag("Player").GetComponent<JoyStick>().enabled = false;
     }
     void Update()
     {

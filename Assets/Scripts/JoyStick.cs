@@ -10,7 +10,6 @@ public class JoyStick : MonoBehaviour {
     void Start() {
         joystick = FindObjectOfType<Joystick>();
         //joybutton = FindObjectOfType<JoyButton>();
-        
     }
 
     // Update is called once per frame
@@ -24,15 +23,12 @@ public class JoyStick : MonoBehaviour {
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         Vector3 movement = new Vector3(joystick.Horizontal * 10f * Time.deltaTime, 0, joystick.Vertical * 10f * Time.deltaTime);
         rigidbody.MovePosition(transform.position + movement);
-        rigidbody.rotation = Quaternion.LookRotation(movement);
-
         if (movement != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(movement);
+            rigidbody.rotation = Quaternion.LookRotation(movement);
 
         if (movement != Vector3.zero)
         {
             gameObject.GetComponent<InputManager>().enabled = false;
-            //Destroy(GetComponent<InputManager>());
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
             gameObject.GetComponentInChildren<WeaponAnimator>().enabled = false;      
         }
