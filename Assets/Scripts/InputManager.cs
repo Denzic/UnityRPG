@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         TouchInput();
+        MouseInput();
     }
 
     public void TouchInput()
@@ -44,6 +45,36 @@ public class InputManager : MonoBehaviour {
             }
             //print(Input.GetTouch(0).position);
         }  
+    }
+    // Only for testing purpose
+    public void MouseInput()
+    {
+        if (!agent.hasPath)
+            gameObject.GetComponent<JoyStick>().enabled = true;
+        //check touch input
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject TouchedObject = hit.collider.gameObject;
+                if (TouchedObject.tag == "InteractableObject" || TouchedObject.tag == "Enemy")
+                {
+                    //print("interactable object touched");
+                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent);
+                }
+                else
+                {
+                    agent.stoppingDistance = 0f;
+                    if (agent.hasPath)
+                        gameObject.GetComponent<JoyStick>().enabled = false;
+
+                    agent.SetDestination(hit.point);
+                }
+            }
+            //print(Input.GetTouch(0).position);
+        }
     }
 
 }
