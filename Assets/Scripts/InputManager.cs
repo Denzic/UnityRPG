@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         TouchInput();
+        clickInput();
         //KeyInput();
         //CharacterRotation();
         //CharacterPostion();
@@ -43,6 +44,32 @@ public class InputManager : MonoBehaviour {
             }
             //print(Input.GetTouch(0).position);
         }  
+    }
+
+    public void clickInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject TouchedObject = hit.collider.gameObject;
+                if (TouchedObject.tag == "InteractableObject" || TouchedObject.tag == "Enemy")
+                {
+                    //print("interactable object touched");
+                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent);
+                }
+                else
+                {
+                    agent.stoppingDistance = 0f;
+                    agent.SetDestination(hit.point);
+
+                }
+
+            }
+            //print(Input.GetTouch(0).position);
+        }
     }
     //public void KeyInput()
     //{
