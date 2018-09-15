@@ -28,7 +28,6 @@ public class CallAudio : MonoBehaviour {
             {
                 audioSource.Play();
             }
-
             audioSource.volume = 1f;
             
             print("gg");
