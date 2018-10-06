@@ -4,15 +4,27 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Interactable : MonoBehaviour {
+
     public NavMeshAgent Agent;
+    private GameObject player;
+    private new Rigidbody rigidbody;
+
     private bool hasInteracted;
 
-    public virtual void MoveToInteraction(NavMeshAgent agent)
+    private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        rigidbody = player.GetComponent<Rigidbody>();
+
+    }
+    public virtual void MoveToInteraction(NavMeshAgent agent, Vector3 rotate)
+    {
+        rigidbody.rotation = Quaternion.LookRotation(rotate);
         hasInteracted = false;
         this.Agent = agent;
         agent.stoppingDistance = 3f;
         agent.destination = transform.position;
+        
         if (agent.hasPath)
             GameObject.FindGameObjectWithTag("Player").GetComponent<JoyStick>().enabled = false;
     }
@@ -27,6 +39,7 @@ public class Interactable : MonoBehaviour {
             }
         }
     }
+
     public virtual void Interact()
     {
         //will run for the first frame.

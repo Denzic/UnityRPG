@@ -5,21 +5,23 @@ using UnityEngine.AI;
 
 public class JoyStick : MonoBehaviour {
     protected Joystick joystick;
+    
     //protected JoyButton joybutton;
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         joystick = FindObjectOfType<Joystick>();
-        //joybutton = FindObjectOfType<JoyButton>();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         virtualInput();
-        
     }
     
-    public void virtualInput(){
-
+    public void virtualInput()
+    {
+        
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         Vector3 movement = new Vector3(joystick.Horizontal * 10f * Time.deltaTime, 0, joystick.Vertical * 10f * Time.deltaTime);
         rigidbody.MovePosition(transform.position + movement);
@@ -30,13 +32,13 @@ public class JoyStick : MonoBehaviour {
         {
             gameObject.GetComponent<InputManager>().enabled = false;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            gameObject.GetComponentInChildren<WeaponAnimator>().enabled = false;      
+            gameObject.GetComponentInChildren<WeaponAction>().enabled = false;      
         }
         else
         {
             gameObject.GetComponent<InputManager>().enabled = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = true;
-            gameObject.GetComponentInChildren<WeaponAnimator>().enabled = true;
+            gameObject.GetComponentInChildren<WeaponAction>().enabled = true;
         }
     }
 

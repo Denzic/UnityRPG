@@ -11,7 +11,6 @@ public class NPC : Interactable {
 
     public override void Interact()
     {
-        Interact();
         //print("Interacted with an NPC");
     }
 }

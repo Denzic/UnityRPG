@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour {
 
@@ -13,8 +14,13 @@ public class InputManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        TouchInput();
-        MouseInput();
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended
+            && !EventSystem.current.IsPointerOverGameObject())
+            TouchInput();
+
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            MouseInput();
     }
 
     public void TouchInput()
@@ -29,10 +35,9 @@ public class InputManager : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject TouchedObject = hit.collider.gameObject;
-                if (TouchedObject.tag == "InteractableObject" || TouchedObject.tag == "Enemy")
+                if (TouchedObject.tag == "InteractableObject" && TouchedObject.tag != "Button")
                 {
-                    //print("interactable object touched");
-                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent);
+                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent, Input.GetTouch(0).position);
                 }
                 else
                 {
@@ -43,7 +48,6 @@ public class InputManager : MonoBehaviour {
                     agent.SetDestination(hit.point);
                 }
             }
-            //print(Input.GetTouch(0).position);
         }  
     }
     // Only for testing purpose
@@ -59,10 +63,9 @@ public class InputManager : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject TouchedObject = hit.collider.gameObject;
-                if (TouchedObject.tag == "InteractableObject" || TouchedObject.tag == "Enemy")
+                if (TouchedObject.tag == "InteractableObject" )
                 {
-                    //print("interactable object touched");
-                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent);
+                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent, Input.mousePosition);
                 }
                 else
                 {
@@ -73,7 +76,6 @@ public class InputManager : MonoBehaviour {
                     agent.SetDestination(hit.point);
                 }
             }
-            //print(Input.GetTouch(0).position);
         }
     }
 
