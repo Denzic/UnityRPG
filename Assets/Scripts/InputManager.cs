@@ -14,14 +14,12 @@ public class InputManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-<<<<<<< HEAD
+
         TouchInput();
         clickInput();
         //KeyInput();
         //CharacterRotation();
         //CharacterPostion();
-=======
->>>>>>> WorkingOnShaders
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended
             && !EventSystem.current.IsPointerOverGameObject())
@@ -58,18 +56,19 @@ public class InputManager : MonoBehaviour {
             }
         }  
     }
-<<<<<<< HEAD
+
 
     public void clickInput()
     {
-=======
+
+    }
     // Only for testing purpose
     public void MouseInput()
     {
         if (!agent.hasPath)
             gameObject.GetComponent<JoyStick>().enabled = true;
         //check touch input
->>>>>>> WorkingOnShaders
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -77,21 +76,18 @@ public class InputManager : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject TouchedObject = hit.collider.gameObject;
-<<<<<<< HEAD
+
                 if (TouchedObject.tag == "InteractableObject" || TouchedObject.tag == "Enemy")
                 {
                     //print("interactable object touched");
                     TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent);
-=======
                 if (TouchedObject.tag == "InteractableObject" )
                 {
                     TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent, Input.mousePosition);
->>>>>>> WorkingOnShaders
                 }
                 else
                 {
                     agent.stoppingDistance = 0f;
-<<<<<<< HEAD
                     agent.SetDestination(hit.point);
 
                 }
@@ -108,10 +104,8 @@ public class InputManager : MonoBehaviour {
     //    movement = Vector3.ClampMagnitude(movement, 1.0f);
     //    movementSqrMagnitude = Vector3.SqrMagnitude(movement);
     //}
-=======
                     if (agent.hasPath)
                         gameObject.GetComponent<JoyStick>().enabled = false;
->>>>>>> WorkingOnShaders
 
                     agent.SetDestination(hit.point);
                 }
