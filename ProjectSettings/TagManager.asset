@@ -7,6 +7,16 @@ TagManager:
   - InteractableObject
   - LongSword
   - Enemy
+  - Button
+  - Fireball
+  - IceBall
+  - CastFireBall
+  - CastIceBall
+  - PlayerCanvas
+  - EnemyCanvas
+  - EnemyHealthBar
+  - RecoverHealth
+  - PlayerHealthBar
   layers:
   - Default
   - TransparentFX
@@ -18,7 +28,7 @@ TagManager:
   - 
   - PostProcessing
   - Enemy
-  - 
+  - Player
   - 
   - 
   - 

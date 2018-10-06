@@ -2,27 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Enemy : NPC {
 
-    public Transform enemy;
-	// Use this for initializations
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    
+
+    public int TakeDamage(int amount, int currentHealth)
     {
-        
-        //collider.tag;	
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+
+        return currentHealth;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Freeze()
     {
-        //print("collided");
-        if(other.tag == "LongSword")
-        {
-            Destroy(gameObject);
-        }
+
     }
+
+
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+
 }

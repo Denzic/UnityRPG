@@ -2,26 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour {
+
     public Camera cam;
     public NavMeshAgent agent;
-    //public Vector3 movement;
-    //private float movementSqrMagnitude;
-    //public float WalkSpeed = 1.5f;
+    public Vector3 movement;
+    private float movementSqrMagnitude;
+    public float WalkSpeed = 1.5f;
 
     // Update is called once per frame
     void Update () {
+<<<<<<< HEAD
         TouchInput();
         clickInput();
         //KeyInput();
         //CharacterRotation();
         //CharacterPostion();
+=======
+>>>>>>> WorkingOnShaders
 
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended
+            && !EventSystem.current.IsPointerOverGameObject())
+            TouchInput();
+
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            MouseInput();
     }
 
     public void TouchInput()
     {
+        if (!agent.hasPath)
+            gameObject.GetComponent<JoyStick>().enabled = true;
+        //check touch input
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             Ray ray = cam.ScreenPointToRay(Input.GetTouch(0).position);
@@ -29,25 +43,33 @@ public class InputManager : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject TouchedObject = hit.collider.gameObject;
-                if (TouchedObject.tag == "InteractableObject" || TouchedObject.tag == "Enemy")
+                if (TouchedObject.tag == "InteractableObject" && TouchedObject.tag != "Button")
                 {
-                    //print("interactable object touched");
-                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent);
+                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent, Input.GetTouch(0).position);
                 }
                 else
                 {
                     agent.stoppingDistance = 0f;
+                    if (agent.hasPath)
+                        gameObject.GetComponent<JoyStick>().enabled = false;
+                    
                     agent.SetDestination(hit.point);
-                     
                 }
-                
             }
-            //print(Input.GetTouch(0).position);
         }  
     }
+<<<<<<< HEAD
 
     public void clickInput()
     {
+=======
+    // Only for testing purpose
+    public void MouseInput()
+    {
+        if (!agent.hasPath)
+            gameObject.GetComponent<JoyStick>().enabled = true;
+        //check touch input
+>>>>>>> WorkingOnShaders
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -55,14 +77,21 @@ public class InputManager : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject TouchedObject = hit.collider.gameObject;
+<<<<<<< HEAD
                 if (TouchedObject.tag == "InteractableObject" || TouchedObject.tag == "Enemy")
                 {
                     //print("interactable object touched");
                     TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent);
+=======
+                if (TouchedObject.tag == "InteractableObject" )
+                {
+                    TouchedObject.GetComponent<Interactable>().MoveToInteraction(agent, Input.mousePosition);
+>>>>>>> WorkingOnShaders
                 }
                 else
                 {
                     agent.stoppingDistance = 0f;
+<<<<<<< HEAD
                     agent.SetDestination(hit.point);
 
                 }
@@ -79,16 +108,15 @@ public class InputManager : MonoBehaviour {
     //    movement = Vector3.ClampMagnitude(movement, 1.0f);
     //    movementSqrMagnitude = Vector3.SqrMagnitude(movement);
     //}
+=======
+                    if (agent.hasPath)
+                        gameObject.GetComponent<JoyStick>().enabled = false;
+>>>>>>> WorkingOnShaders
 
-    //public void CharacterRotation()
-    //{
-    //    Quaternion rotation = Quaternion.LookRotation(movement);
-    //    if (movement != Vector3.zero)
-    //        transform.rotation = rotation;
-    //}
+                    agent.SetDestination(hit.point);
+                }
+            }
+        }
+    }
 
-    //public void CharacterPostion()
-    //{
-    //    transform.Translate(movement * WalkSpeed * Time.deltaTime, Space.World);
-    //}
 }
