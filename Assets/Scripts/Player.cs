@@ -7,30 +7,32 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 
     private float maxHealth = 300f;
-    public float currentHealth;
-    public float normalized;
+    private float currentHealth = 0;
+    private float normalized =0;
     private Image healthBar;
 
     // Use this for initialization
     void Start () {
-        //currentHealth = maxHealth;
+        currentHealth = maxHealth;
         healthBar = GameObject.FindGameObjectWithTag("PlayerHealthBar").GetComponent<Image>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         DisplayHealth();
-	}
+        CalculateHealth(maxHealth, currentHealth);
+
+    }
 
     public void TakeDamage(float damage)
     {
 
     }
 
-    private void CalculateHealth(int maxhealth, int currentHealth)
+    private void CalculateHealth(float maxhealth, float currentHealth)
     {
         float clamped = Mathf.Clamp(currentHealth, 0f, maxhealth);
-        normalized = (clamped - 0) / (maxHealth - 0);
+        normalized = (clamped - 0) / (maxhealth - 0);
     }
 
     private void DisplayHealth()

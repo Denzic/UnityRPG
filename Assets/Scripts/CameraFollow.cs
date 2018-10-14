@@ -5,14 +5,14 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject player;
-    public float cameraHeight = 200.0f;
+    public float cameraHeight = 20.0f;
 
     void Update()
     {
         Vector3 pos = player.transform.position;
         pos.y += cameraHeight;
         pos.z -= cameraHeight;
-        pos.x -= 30f;
+        pos.x -= 3f;
         transform.position = pos;
     }
 
