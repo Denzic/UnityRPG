@@ -29,9 +29,9 @@ public class FSM_AI : MonoBehaviour {
     public LayerMask attacklayerMask;
     bool escapebool;
     private float currentHealth = 0;
-    private float enemyDamage = 0.5f;
+    private float enemyDamage = 5f;
     private Image healthbar2;
-    bool attackbool;
+    bool attackbool = false;
     
 
 
@@ -62,16 +62,16 @@ public class FSM_AI : MonoBehaviour {
         {
             escapebool = true;
         }
-        if(states == EnemyStates.ATTACK)
-        {
-            attackbool = true;
-        }
+        //if(states == EnemyStates.ATTACK)
+        //{
+        //    attackbool = false;
+        //}
         if (currentHealthy <= 0)
         {
             states = EnemyStates.DIE;
         }
 
-        print(currentHealth);
+        //print(EnemyStates);
     }
 
     IEnumerator waitTwos()
@@ -82,48 +82,45 @@ public class FSM_AI : MonoBehaviour {
         states = EnemyStates.FINDWAY;
     }
 
-    IEnumerator attackone()
-    {
-        yield return new WaitForSeconds(1);
-        InvokeRepeating("TakeDamage", 1.0f, 1.0f);
-    }
     public void TakeDamage()
     {
-        if(attackDetector.Length<=0)
         GameObject.FindWithTag("Player").GetComponent<Player>().currentHealth = GameObject.FindWithTag("Player").GetComponent<Player>().currentHealth - enemyDamage;
-        
+        if (attackDetector.Length <= 0)
+        {
+
+        }
     }
 
 
     private void EnemyChange(EnemyStates st)
-{
-
-    switch (st)
     {
-        case EnemyStates.IDIE:
-            EnemyIdle();
-            break;
-        case EnemyStates.FINDWAY:
-            FindWay();
-            break;
-        case EnemyStates.ATTACK:
-            Attack();
-            break;
-        case EnemyStates.ESCAPE:
-            Escape();
-            break;
-        case EnemyStates.DIE:
-            Die();
-            break;
-        default:
-            break;
+
+        switch (st)
+        {
+            case EnemyStates.IDIE:
+                EnemyIdle();
+                break;
+            case EnemyStates.FINDWAY:
+                FindWay();
+                break;
+            case EnemyStates.ATTACK:
+                Attack();
+                break;
+            case EnemyStates.ESCAPE:
+                Escape();
+                break;
+            case EnemyStates.DIE:
+                Die();
+                break;
+            default:
+                break;
+        }
     }
-}
 
     void EnemyIdle()
     {
         StartCoroutine(waitTwos());
-       
+        CancelInvoke();
     }
 
     void FindWay()
@@ -140,13 +137,16 @@ public class FSM_AI : MonoBehaviour {
         if (currentHealthy < 20 && escapebool == false)
         {
             states = EnemyStates.ESCAPE;
-        }  
+        }
+        CancelInvoke();
     }
     void Attack()
     {
-        if(attackbool==true)
-        InvokeRepeating("TakeDamage", 1.0f, 1.0f);
-        
+        if (attackbool == false)
+        {
+            InvokeRepeating("TakeDamage", 0.0f, 1.0f);
+            attackbool = true;
+        }
     }
 
 
@@ -159,6 +159,7 @@ public class FSM_AI : MonoBehaviour {
             print("RUNNNNNNNNN");
             states = EnemyStates.IDIE;
         }
+        CancelInvoke();
     }
     public void Die()
     {
@@ -166,5 +167,6 @@ public class FSM_AI : MonoBehaviour {
         Destroy(this.gameObject, 2);
         Agent.speed =0.0f;
         Destroy(healthbar2);
+        CancelInvoke();
     }
 }

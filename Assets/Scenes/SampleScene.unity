@@ -899,7 +899,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1a5023b443f2b0e419baaba39780e850, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -1376,7 +1376,6 @@ MonoBehaviour:
   attacklayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  healthbar2: {fileID: 0}
 --- !u!1 &1108711946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1223154136434794, guid: 0bc7b9d694f771246955af5b9517205e,
@@ -1402,7 +1401,6 @@ MonoBehaviour:
   attacklayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  healthbar2: {fileID: 0}
 --- !u!1 &1201128639
 GameObject:
   m_ObjectHideFlags: 0
@@ -2448,7 +2446,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 1
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -2624,7 +2622,6 @@ MonoBehaviour:
   attacklayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  healthbar2: {fileID: 0}
 --- !u!1 &2074772916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2795,6 +2792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   normalized: 0
+  enemyDamage: 5
 --- !u!114 &2074772926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2818,7 +2816,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2f9dd92676ef41144b3be65c69e8ce8e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dbe9524c2513a044aa1402555526a6ae, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
