@@ -85,10 +85,6 @@ public class FSM_AI : MonoBehaviour {
     public void TakeDamage()
     {
         GameObject.FindWithTag("Player").GetComponent<Player>().currentHealth = GameObject.FindWithTag("Player").GetComponent<Player>().currentHealth - enemyDamage;
-        if (attackDetector.Length <= 0)
-        {
-
-        }
     }
 
 
@@ -147,6 +143,8 @@ public class FSM_AI : MonoBehaviour {
             InvokeRepeating("TakeDamage", 0.0f, 1.0f);
             attackbool = true;
         }
+        if (attackDetector.Length > 0)
+            states = EnemyStates.IDIE;
     }
 
 
