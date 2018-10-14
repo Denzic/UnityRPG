@@ -27,7 +27,7 @@ public class Enemy : NPC {
 
     public void Die()
     {
-        Destroy(gameObject);
+        gameObject.GetComponent<FSM_AI>().Die();
     }
 
 

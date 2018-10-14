@@ -8,6 +8,8 @@ public class CallAudio : MonoBehaviour {
     public AudioSource audioSource;
     //public List<AudioClip> audioSourceList;
     public AudioSource backgroudMusic;
+    public AudioSource attackSource;
+    
 
     // Use this for initialization
 
@@ -30,16 +32,33 @@ public class CallAudio : MonoBehaviour {
             }
             audioSource.volume = 1f;
             
-            print("gg");
         }
         else
         {
             audioSource.Stop();
-            print("pp");
         }
-        //if (!GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>().hasPath)
-        //{
-        //    audioSource.Stop();
-        //}
+        if (!GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>().hasPath)
+        {
+            audioSource.Stop();
+        }
     }
+
+    //void AttackAudio()
+    //{
+    //    if (GetComponent<WeaponAction>().animator.isActiveAndEnabled)
+    //    {
+    //        if (!attackSource.isPlaying)
+    //        {
+    //            attackSource.Play();
+    //        }
+    //        audioSource.volume = 1f;
+    //        //Debug.Log("attsource");
+    //    }
+    //    else
+    //    {
+    //        attackSource.Stop();
+    //        Debug.Log("aa");
+    //    }
+        
+    //}
 }

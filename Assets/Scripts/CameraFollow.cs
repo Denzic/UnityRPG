@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 pos = player.transform.position;
         pos.y += cameraHeight;
         pos.z -= cameraHeight;
-        pos.x -= 30f;
+        pos.x -= 3f;
         transform.position = pos;
     }
 

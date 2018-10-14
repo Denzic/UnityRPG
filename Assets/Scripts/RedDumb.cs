@@ -12,11 +12,12 @@ public class RedDumb : Enemy {
     public int currentHealth = 0, toughness = 0;
     public int maxHealth = 50;
     public NavMeshAgent eneAgent;
-    private Collider[] playerDetector;
+    public Collider[] playerDetector;
     public LayerMask playerLayerMask;
     public Image healthBar;
     float burnTimer = 0;
     float normalized = 1;
+    public AudioSource attackSource;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class RedDumb : Enemy {
         playerDetector = Physics.OverlapSphere(eneAgent.transform.position, 6, playerLayerMask);
         if (playerDetector.Length > 0)
         {
-            print(playerDetector.Length);
+            print("Detector: " + playerDetector[0]);
             chasePlayer();
         }
 
@@ -48,7 +49,26 @@ public class RedDumb : Enemy {
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "LongSword")
+        {
             Die();
+            if (!attackSource.isPlaying)
+            {
+
+                attackSource.Play();
+                attackSource.volume = 1f;
+                Debug.Log("attsource");
+                if (attackSource.time>0.5)
+                {
+                    attackSource.Stop();
+                }
+            }
+            //else
+            //{
+            //    attackSource.Stop();
+            //}
+
+        }
+            
 
         if (other.tag == "Fireball")
         {
@@ -63,6 +83,8 @@ public class RedDumb : Enemy {
         {
             Freeze();
         }
+
+
     }
 
     void Burn()

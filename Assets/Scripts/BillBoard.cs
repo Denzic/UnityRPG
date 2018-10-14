@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BillBoard : MonoBehaviour {
-
     public Camera mainCam;
 	// Use this for initialization
 	void Start () {

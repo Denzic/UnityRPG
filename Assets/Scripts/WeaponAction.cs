@@ -36,10 +36,14 @@ public class WeaponAction : Interactable
             StopAttack();
     }
 
-    void PerformAttack()
+    public void PerformAttack()
     {
-        animator.SetTrigger("normal_Attack"); ;
+        animator.SetTrigger("normal_Attack");
     }
+    //public void Setbool()
+    //{
+    //    animator.SetBool("normal_Attack", true);
+    //}
     void StopAttack()
     {
         animator.SetTrigger("stop_Attack");
