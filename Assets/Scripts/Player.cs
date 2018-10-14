@@ -10,27 +10,28 @@ public class Player : MonoBehaviour {
     public float currentHealth;
     public float normalized;
     private Image healthBar;
+    public float enemyDamage = 5;
 
     // Use this for initialization
     void Start () {
-        //currentHealth = maxHealth;
+        currentHealth = maxHealth;
         healthBar = GameObject.FindGameObjectWithTag("PlayerHealthBar").GetComponent<Image>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         DisplayHealth();
-	}
-
-    public void TakeDamage(float damage)
-    {
+        CalculateHealth(maxHealth, currentHealth);
 
     }
 
-    private void CalculateHealth(int maxhealth, int currentHealth)
+
+
+    private void CalculateHealth(float maxhealth, float currentHealth)
     {
         float clamped = Mathf.Clamp(currentHealth, 0f, maxhealth);
-        normalized = (clamped - 0) / (maxHealth - 0);
+        normalized = (clamped - 0) / (maxhealth - 0);
+        print(currentHealth);
     }
 
     private void DisplayHealth()

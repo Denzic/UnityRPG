@@ -28,7 +28,10 @@ public class FSM_AI : MonoBehaviour {
     private Collider[] attackDetector;
     public LayerMask attacklayerMask;
     bool escapebool;
-    public Image healthbar2;
+    private float currentHealth = 0;
+    private float enemyDamage = 0.5f;
+    private Image healthbar2;
+    bool attackbool;
     
 
 
@@ -39,6 +42,8 @@ public class FSM_AI : MonoBehaviour {
         Anim = GetComponent<Animator>();
 
         EnemySelf = this.transform;
+
+        //currentHealth = ;
 
     }
 
@@ -56,23 +61,41 @@ public class FSM_AI : MonoBehaviour {
         if (states == EnemyStates.ESCAPE)
         {
             escapebool = true;
-            print("89898989");
+        }
+        if(states == EnemyStates.ATTACK)
+        {
+            attackbool = true;
         }
         if (currentHealthy <= 0)
         {
             states = EnemyStates.DIE;
         }
+
+        print(currentHealth);
     }
 
     IEnumerator waitTwos()
     {
         yield return new WaitForSeconds(2);
         Agent.speed = 5.0f;
+        attackbool = false;
         states = EnemyStates.FINDWAY;
     }
 
+    IEnumerator attackone()
+    {
+        yield return new WaitForSeconds(1);
+        InvokeRepeating("TakeDamage", 1.0f, 1.0f);
+    }
+    public void TakeDamage()
+    {
+        if(attackDetector.Length<=0)
+        GameObject.FindWithTag("Player").GetComponent<Player>().currentHealth = GameObject.FindWithTag("Player").GetComponent<Player>().currentHealth - enemyDamage;
+        
+    }
 
-private void EnemyChange(EnemyStates st)
+
+    private void EnemyChange(EnemyStates st)
 {
 
     switch (st)
@@ -117,15 +140,16 @@ private void EnemyChange(EnemyStates st)
         if (currentHealthy < 20 && escapebool == false)
         {
             states = EnemyStates.ESCAPE;
-
-        }
-
+        }  
     }
     void Attack()
     {
-
-        //invoke =
+        if(attackbool==true)
+        InvokeRepeating("TakeDamage", 1.0f, 1.0f);
+        
     }
+
+
     void Escape()
     {
         Agent.SetDestination(new Vector3(-30, 0, -20));
