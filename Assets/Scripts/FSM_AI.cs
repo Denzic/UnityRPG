@@ -28,7 +28,7 @@ public class FSM_AI : MonoBehaviour {
     private Collider[] attackDetector;
     public LayerMask attacklayerMask;
     bool escapebool;
-    private float currentHealth = 0;
+    //private float currentHealth = 0;
     private float enemyDamage = 5f;
     private Image healthbar2;
     bool attackbool = false;
@@ -45,6 +45,14 @@ public class FSM_AI : MonoBehaviour {
 
         //currentHealth = ;
 
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "LongSword")
+        {
+            states = EnemyStates.DIE;
+
+        }
     }
 
     void Update()
@@ -88,7 +96,7 @@ public class FSM_AI : MonoBehaviour {
     }
 
 
-    private void EnemyChange(EnemyStates st)
+    public void EnemyChange(EnemyStates st)
     {
 
         switch (st)

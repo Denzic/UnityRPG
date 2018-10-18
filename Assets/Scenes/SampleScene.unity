@@ -1383,8 +1383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states: 0
-  Agent: {fileID: 0}
-  EnemySelf: {fileID: 0}
+  Agent: {fileID: 2074772922}
+  EnemySelf: {fileID: 1098397165}
   Anim: {fileID: 0}
   Target: []
   moveSpots: []
@@ -1408,8 +1408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states: 0
-  Agent: {fileID: 0}
-  EnemySelf: {fileID: 0}
+  Agent: {fileID: 2074772922}
+  EnemySelf: {fileID: 289037636}
   Anim: {fileID: 0}
   Target: []
   moveSpots: []
