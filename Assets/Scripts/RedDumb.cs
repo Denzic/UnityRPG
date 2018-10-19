@@ -18,7 +18,6 @@ public class RedDumb : Enemy {
     float burnTimer = 0;
     float normalized = 1;
     public AudioSource attackSource;
-    public AudioClip attackSourceclip;
 
     private void Start()
     {
@@ -54,13 +53,22 @@ public class RedDumb : Enemy {
             Die();
             if (!attackSource.isPlaying)
             {
-                attackSource.PlayOneShot(attackSourceclip);
-                attackSource.volume = 5.0f;
+
+                attackSource.Play();
+                attackSource.volume = 1f;
                 Debug.Log("attsource");
+                if (attackSource.time>0.5)
+                {
+                    attackSource.Stop();
+                }
             }
+            //else
+            //{
+            //    attackSource.Stop();
+            //}
+
         }
-
-
+            
 
         if (other.tag == "Fireball")
         {
@@ -77,15 +85,6 @@ public class RedDumb : Enemy {
         }
 
 
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "LongSword")
-        {
-            //attackSource.Stop();
-
-        }
     }
 
     void Burn()
