@@ -18,6 +18,7 @@ public class RedDumb : Enemy {
     float burnTimer = 0;
     float normalized = 1;
     public AudioSource attackSource;
+    public AudioClip attackSourceclip;
 
     private void Start()
     {
@@ -54,13 +55,8 @@ public class RedDumb : Enemy {
             if (!attackSource.isPlaying)
             {
 
-                attackSource.Play();
-                attackSource.volume = 1f;
-                Debug.Log("attsource");
-                if (attackSource.time>0.5)
-                {
-                    attackSource.Stop();
-                }
+                attackSource.PlayOneShot(attackSourceclip);
+                attackSource.volume = 5.0f;
             }
             //else
             //{
