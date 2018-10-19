@@ -30,7 +30,7 @@ public class CallAudio : MonoBehaviour {
             {
                 audioSource.Play();
             }
-            audioSource.volume = 1f;
+            audioSource.volume = 0.4f;
             
         }
         else

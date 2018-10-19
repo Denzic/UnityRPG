@@ -9,10 +9,14 @@ public class JoyButton : MonoBehaviour {
 
     Image iceImage;
     Image fireImage;
+    Image HealImage;
     Button fireButton;
     Button iceButton;
     float fireButtonTimer = 3;
     float iceButtonTimer = 3;
+    private float healAmount = 50;
+    public float healthPotion = 300;
+
 
     public GameObject Weapon;
     // Use this for initialization
@@ -22,6 +26,7 @@ public class JoyButton : MonoBehaviour {
         fireButton = GameObject.FindGameObjectWithTag("CastFireBall").GetComponent<Button>();
         iceImage = GameObject.FindGameObjectWithTag("CastIceBall").GetComponent<Image>();
         iceButton = GameObject.FindGameObjectWithTag("CastIceBall").GetComponent<Button>();
+        HealImage = GameObject.FindGameObjectWithTag("RecoverHealth").GetComponent<Image>();
     }
 
     private void Update()
@@ -30,6 +35,7 @@ public class JoyButton : MonoBehaviour {
         iceButtonTimer += Time.deltaTime;
         fireImage.fillAmount = CDTime(fireButtonTimer, fireImage, fireButton);
         iceImage.fillAmount = CDTime(iceButtonTimer, iceImage, iceButton);
+        HealImage.fillAmount = HealthPotion(healthPotion, HealImage);
     }
 
     public void FireBall()
@@ -62,5 +68,20 @@ public class JoyButton : MonoBehaviour {
         return normalized;
     }
 
+    public void RecoverHealth()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().currentHealth =
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().currentHealth + healAmount;
+        healthPotion = healthPotion - healAmount;
+    }
 
+    public float HealthPotion(float healthPotion, Image buttonImage)
+    {
+        float clamped = Mathf.Clamp(healthPotion, 0f, 300f);
+        float normalized = (clamped - 0) / (300 - 0);
+
+            buttonImage.color = Color.green;
+
+        return normalized;
+    }
 }

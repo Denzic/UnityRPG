@@ -38,7 +38,7 @@ public class RedDumb : Enemy {
         if (burnTimer >= 3)
             ResetEnemyStatus();
         DisplayHealth();
-        print(currentHealth);
+        //print(currentHealth);
     }
 
     public void chasePlayer()
@@ -58,12 +58,7 @@ public class RedDumb : Enemy {
                 attackSource.volume = 5.0f;
                 Debug.Log("attsource");
             }
-                
-            
-
         }
-
-
 
         if (other.tag == "Fireball")
         {

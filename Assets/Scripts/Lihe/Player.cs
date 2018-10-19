@@ -22,7 +22,11 @@ public class Player : MonoBehaviour {
 	void Update () {
         DisplayHealth();
         CalculateHealth(maxHealth, currentHealth);
-
+        if (currentHealth == 0)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PostEffectScript2>().enabled = true;
+            Time.timeScale = 0;
+        }
     }
 
 

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionItem : Interactable {
+public class NPC : Interactable {
+
+    private void Update()
+    {
+        
+    }
 
     public override void Interact()
     {
-        //base.Interact();
-        print("Interacting with sign post.");
+        print("Interacted with an NPC");
     }
 }

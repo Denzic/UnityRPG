@@ -21,6 +21,8 @@ public class InputManager : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             MouseInput();
+        if (!agent.hasPath)
+            gameObject.GetComponent<JoyStick>().enabled = true;
     }
 
     public void TouchInput()
@@ -30,6 +32,8 @@ public class InputManager : MonoBehaviour {
         //check touch input
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
+            ///The raycasting part is written by Lihe
+           
             Ray ray = cam.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
@@ -50,7 +54,6 @@ public class InputManager : MonoBehaviour {
             }
         }  
     }
-    // Only for testing purpose
     public void MouseInput()
     {
         if (!agent.hasPath)
@@ -58,6 +61,8 @@ public class InputManager : MonoBehaviour {
         //check touch input
         if (Input.GetMouseButtonDown(0))
         {
+            ///The raycasting part is written by Lihe
+
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))

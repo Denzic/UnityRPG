@@ -43,7 +43,7 @@ public class Interactable : MonoBehaviour {
     public virtual void Interact()
     {
         //will run for the first frame.
-            //print("Interacting");
+            print("Interactinggggggg");
     }
 
 }
